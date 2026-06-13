@@ -34,8 +34,8 @@ app.use(
   })
 );
 
-// Handle OPTIONS preflight for all routes
-app.options('*', cors());
+// Handle OPTIONS preflight for all routes (Express 5 requires named wildcards)
+app.options('/{*splat}', cors());
 
 // Body parsing
 app.use(express.json({ limit: '10kb' }));

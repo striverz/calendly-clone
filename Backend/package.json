@@ -1,0 +1,28 @@
+{
+  "name": "calendly-backend",
+  "version": "1.0.0",
+  "description": "Calendly Clone Backend API — Node.js + Express + MySQL",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "migrate": "node src/database/migrate.js",
+    "migrate:reset": "node src/database/migrate.js --reset"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.2.0",
+    "luxon": "^3.7.2",
+    "mysql2": "^3.22.5",
+    "nodemailer": "^8.0.11",
+    "nodemon": "^3.1.14"
+  }
+}

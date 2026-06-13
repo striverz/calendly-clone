@@ -55,7 +55,7 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
       {/* Bottom */}
       <div className="px-3 py-4 space-y-1" style={{ borderTop: '1px solid #F1F5F9' }}>
         <a
-          href="http://localhost:3000"
+          href={window.location.origin}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-3 py-2 text-xs text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-colors"

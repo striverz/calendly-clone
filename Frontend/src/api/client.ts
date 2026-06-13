@@ -1,4 +1,4 @@
-const BASE_URL = 'https://calendly-clone-11gw.vercel.app/api';
+const BASE_URL = 'https://latest-backend1.vercel.app/';
 
 class ApiError extends Error {
   status: number;

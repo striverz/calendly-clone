@@ -18,21 +18,24 @@ app.use(helmet());
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
+  'https://calendly-clone-phi-seven.vercel.app',
   ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) : []),
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow non-browser requests (curl, Postman) and listed origins
       if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
-      callback(new Error(`CORS: origin ${origin} not allowed`));
+      callback(null, false);
     },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   })
 );
+
+// Handle OPTIONS preflight for all routes
+app.options('*', cors());
 
 // Body parsing
 app.use(express.json({ limit: '10kb' }));

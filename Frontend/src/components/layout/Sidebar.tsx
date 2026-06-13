@@ -23,7 +23,7 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
           <div className="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center shadow-[0_2px_8px_rgba(79,70,229,0.3)] group-hover:bg-indigo-700 transition-colors shrink-0">
             <Calendar className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-gray-900 text-[15px] tracking-tight">ScheduleFlow</span>
+          <span className="font-bold text-gray-900 text-[15px] tracking-tight">Calendly</span>
         </button>
       </div>
 

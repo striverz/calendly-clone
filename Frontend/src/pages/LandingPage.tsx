@@ -84,7 +84,7 @@ const TESTIMONIALS = [
     name: 'Sarah Chen',
     role: 'Product Consultant',
     quote:
-      '"ScheduleFlow transformed how I handle client calls. What used to take 10+ emails now happens in one click. My time is finally my own."',
+      '"Calendly transformed how I handle client calls. What used to take 10+ emails now happens in one click. My time is finally my own."',
   },
   {
     initials: 'MJ',
@@ -341,7 +341,7 @@ export default function LandingPage() {
             <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-[0_0_0_2px_rgba(79,70,229,0.15)]">
               <Calendar className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-bold text-gray-900 tracking-tight">ScheduleFlow</span>
+            <span className="text-lg font-bold text-gray-900 tracking-tight">Calendly</span>
           </button>
 
           {/* Desktop nav */}
@@ -561,11 +561,11 @@ export default function LandingPage() {
             <div className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
               <Calendar className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-sm font-bold text-gray-900">ScheduleFlow</span>
+            <span className="text-sm font-bold text-gray-900">Calendly</span>
           </button>
 
           <p className="text-xs text-gray-400 text-center">
-            © {new Date().getFullYear()} ScheduleFlow. Built for seamless scheduling.
+            © {new Date().getFullYear()} Calendly. Built for seamless scheduling.
           </p>
 
           <div className="flex items-center gap-6">

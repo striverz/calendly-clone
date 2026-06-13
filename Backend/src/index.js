@@ -20,6 +20,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'https://calendly-clone-phi-seven.vercel.app',
   ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) : []),
+  ...(process.env.FRONTEND_URL_PROD ? [process.env.FRONTEND_URL_PROD.trim()] : []),
 ];
 
 app.use(
@@ -68,8 +69,8 @@ app.use((req, res) => {
 // Global error handler
 app.use(errorHandler);
 
-// Local dev: start the server and verify DB connection
-if (process.env.NODE_ENV !== 'production') {
+// Local dev only — never run listen/exit on Vercel serverless (VERCEL=1)
+if (!process.env.VERCEL) {
   (async () => {
     try {
       const conn = await db.getConnection();

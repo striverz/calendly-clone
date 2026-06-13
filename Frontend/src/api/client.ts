@@ -1,4 +1,4 @@
-const BASE_URL = 'https://latest-backend1.vercel.app/';
+const BASE_URL = 'https://latest-backend1.vercel.app/api';
 
 class ApiError extends Error {
   status: number;

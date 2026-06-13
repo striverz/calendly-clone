@@ -55,23 +55,26 @@ app.use((req, res) => {
 // Global error handler
 app.use(errorHandler);
 
-// Startup
-async function start() {
-  try {
-    const conn = await db.getConnection();
-    console.log('MySQL connected successfully.');
-    conn.release();
+// Local dev: start the server and verify DB connection
+if (process.env.NODE_ENV !== 'production') {
+  (async () => {
+    try {
+      const conn = await db.getConnection();
+      console.log('MySQL connected successfully.');
+      conn.release();
+    } catch (err) {
+      console.error('Failed to connect to MySQL:', err.message);
+      console.error('Make sure MySQL is running and credentials in .env are correct.');
+      process.exit(1);
+    }
 
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
+      console.log(`Server running on port ${PORT}`);
       console.log(`API: http://localhost:${PORT}/api`);
       console.log(`Health: http://localhost:${PORT}/health`);
     });
-  } catch (err) {
-    console.error('Failed to connect to MySQL:', err.message);
-    console.error('Make sure MySQL is running and credentials in .env are correct.');
-    process.exit(1);
-  }
+  })();
 }
 
-start();
+// Vercel serverless export
+module.exports = app;

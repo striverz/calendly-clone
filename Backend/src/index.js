@@ -73,11 +73,11 @@ if (process.env.NODE_ENV !== 'production') {
   (async () => {
     try {
       const conn = await db.getConnection();
-      console.log('MySQL connected successfully.');
+      console.log('PostgreSQL (Neon) connected successfully.');
       conn.release();
     } catch (err) {
-      console.error('Failed to connect to MySQL:', err.message);
-      console.error('Make sure MySQL is running and credentials in .env are correct.');
+      console.error('Failed to connect to PostgreSQL:', err.message);
+      console.error('Check DATABASE_URL in .env is correct.');
       process.exit(1);
     }
 

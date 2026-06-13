@@ -40,13 +40,13 @@ async function createEventType({ name, slug, duration, description, color, locat
   );
   if (existing.length) throw new AppError(`Slug "${slug}" is already in use`, 409);
 
-  const [result] = await db.query(
+  const [rows] = await db.query(
     `INSERT INTO event_types (user_id, name, slug, duration, description, color, location)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+     VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id`,
     [DEFAULT_USER_ID, name, slug, duration, description || null, color || '#006BFF', location || null]
   );
 
-  return getEventTypeById(result.insertId);
+  return getEventTypeById(rows[0].id);
 }
 
 async function updateEventType(id, fields) {

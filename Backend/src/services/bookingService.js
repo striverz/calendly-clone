@@ -66,14 +66,14 @@ async function createBooking(slug, { invitee_name, invitee_email, start_time, no
   try {
     await conn.beginTransaction();
 
-    const [result] = await conn.query(
+    const [rows] = await conn.query(
       `INSERT INTO bookings
          (event_type_id, invitee_name, invitee_email, start_time, end_time, status, notes, confirmation_token)
-       VALUES (?, ?, ?, ?, ?, 'confirmed', ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, 'confirmed', ?, ?) RETURNING id`,
       [eventType.id, invitee_name, invitee_email, startUTCStr, endUTCStr, notes || null, confirmationToken]
     );
 
-    const bookingId = result.insertId;
+    const bookingId = rows[0].id;
 
     if (Array.isArray(answers) && answers.length > 0) {
       for (const ans of answers) {
@@ -128,7 +128,7 @@ async function listMeetings({ type = 'all', page = 1, limit = 20, userId = DEFAU
     WHERE et.user_id = ? ${condition}
   `;
   const [countRows] = await db.query(countQuery, params);
-  const total = countRows[0].total;
+  const total = parseInt(countRows[0].total, 10);
 
   const dataQuery = `
     ${BOOKING_SELECT}
@@ -153,7 +153,6 @@ async function cancelMeeting(id, { reason } = {}, userId = DEFAULT_USER_ID) {
   const booking = await getBookingById(id);
 
   if (booking.host_email !== (await db.query('SELECT email FROM users WHERE id = ?', [userId]))[0][0]?.email) {
-    // Verify the booking belongs to this user
     const [etRows] = await db.query(
       'SELECT user_id FROM event_types WHERE id = ?',
       [booking.event_type_id]

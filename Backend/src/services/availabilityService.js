@@ -53,15 +53,15 @@ async function updateRules(rules, userId = DEFAULT_USER_ID) {
       const { day_of_week, is_available, start_time, end_time } = rule;
 
       const startTime = is_available && start_time ? start_time + ':00' : null;
-      const endTime = is_available && end_time ? end_time + ':00' : null;
+      const endTime   = is_available && end_time   ? end_time   + ':00' : null;
 
       await conn.query(
         `INSERT INTO availability_rules (schedule_id, day_of_week, is_available, start_time, end_time)
          VALUES (?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE
-           is_available = VALUES(is_available),
-           start_time = VALUES(start_time),
-           end_time = VALUES(end_time)`,
+         ON CONFLICT (schedule_id, day_of_week) DO UPDATE SET
+           is_available = EXCLUDED.is_available,
+           start_time   = EXCLUDED.start_time,
+           end_time     = EXCLUDED.end_time`,
         [schedule.id, day_of_week, is_available ? 1 : 0, startTime, endTime]
       );
     }

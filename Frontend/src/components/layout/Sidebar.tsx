@@ -68,8 +68,8 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
             J
           </div>
           <div className="min-w-0">
-            <p className="text-[13px] font-semibold text-gray-900 truncate leading-tight">John Doe</p>
-            <p className="text-xs text-gray-400 truncate">john@example.com</p>
+            <p className="text-[13px] font-semibold text-gray-900 truncate leading-tight">Manikanta Korimilli</p>
+            <p className="text-xs text-gray-400 truncate">mani.dev@gmail.com</p>
           </div>
         </div>
       </div>

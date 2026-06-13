@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, MapPin, Link2, Pencil, Trash2, Eye, Copy, Check } from 'lucide-react';
+import { Clock, MapPin, Link2, Pencil, Trash2, Copy, Check } from 'lucide-react';
 import { formatDuration } from '@/utils/format';
 import type { EventType } from '@/types';
 import toast from 'react-hot-toast';
@@ -63,9 +63,14 @@ export default function EventTypeCard({ eventType, onEdit, onDelete }: Props) {
         {/* Booking URL row */}
         <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-50 border border-gray-100 mb-4">
           <Link2 className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-          <span className="flex-1 text-xs text-gray-500 truncate font-mono">
-            /book/{eventType.slug}
-          </span>
+          <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 text-xs text-indigo-600 font-medium hover:text-indigo-800 hover:underline"
+          >
+            View Booking Page
+          </a>
           <button
             onClick={handleCopy}
             className={cn(
@@ -84,15 +89,6 @@ export default function EventTypeCard({ eventType, onEdit, onDelete }: Props) {
 
         {/* Actions */}
         <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-          <a
-            href={bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-lg text-xs font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 border border-gray-200 transition-all duration-150"
-          >
-            <Eye className="w-3.5 h-3.5" />
-            View
-          </a>
           <button
             onClick={() => onEdit(eventType)}
             className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 px-3 rounded-lg text-xs font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 transition-all duration-150"
